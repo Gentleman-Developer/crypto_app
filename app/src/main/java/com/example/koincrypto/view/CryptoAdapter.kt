@@ -1,16 +1,15 @@
 package com.example.koincrypto.view
 
-import android.graphics.Color
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.koincrypto.R
 import com.example.koincrypto.databinding.RecyclerRowBinding
 import com.example.koincrypto.model.CryptoModel
+import androidx.core.graphics.toColorInt
 
-class RecyclerViewAdapter(private val cryptoList : ArrayList<CryptoModel>, private val listener : Listener) : RecyclerView.Adapter<RecyclerViewAdapter.RowHolder>() {
+class RecyclerViewAdapter(private val cryptoList : ArrayList<CryptoModel>
+, private val listener : Listener
+) : RecyclerView.Adapter<RecyclerViewAdapter.RowHolder>() {
 
     interface Listener {
         fun onItemClick(cryptoModel: CryptoModel)
@@ -43,10 +42,9 @@ class RecyclerViewAdapter(private val cryptoList : ArrayList<CryptoModel>, priva
         holder.itemView.setOnClickListener {
             listener.onItemClick(cryptoList.get(position))
         }
-        holder.itemView.setBackgroundColor(Color.parseColor(colors[position % 8]))
-        holder.binding.cryptoNameText.text = cryptoList.get(position).currency
-        holder.binding.cryptoPriceText.text = cryptoList.get(position).price
+        holder.itemView.setBackgroundColor(colors[position % 8].toColorInt())
+        holder.binding.cryptoNameText.text = cryptoList[position].currency
+        holder.binding.cryptoPriceText.text = cryptoList[position].price
     }
-
 
 }
